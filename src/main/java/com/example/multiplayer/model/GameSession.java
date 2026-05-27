@@ -16,6 +16,7 @@ import java.util.UUID;
 public class GameSession {
 
     @Id
+    @Column(length = 50)
     private String id; // Session ID (e.g., UUID)
 
     private String gameType; // e.g., "TIC_TAC_TOE", "TRIVIA"
@@ -29,7 +30,7 @@ public class GameSession {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "game_session_players", joinColumns = @JoinColumn(name = "game_session_id"))
-    @Column(name = "player_name")
+    @Column(name = "player_name", length=255)
     private List<String> players = new ArrayList<>(); // List of player names
 
     @PrePersist
