@@ -24,12 +24,14 @@ public class GameSession {
 
     private int minPlayers;
     private int maxPlayers;
-    
+
     private String status; // "WAITING", "IN_PROGRESS", "FINISHED"
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "game_session_players", joinColumns = @JoinColumn(name = "game_session_id"))
+    @Column(name = "player_name")
     private List<String> players = new ArrayList<>(); // List of player names
-    
+
     @PrePersist
     public void generateId() {
         if (this.id == null) {
